@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmaConfig>
+
+<ConsumerGroup>
+	<DefaultConsumer value="Consumer_1"/>
+	<ConsumerList>
+		<Consumer>
+			<Name value="Consumer_1"/>
+			<Channel value="Channel_1"/>
+			<Dictionary value="Dictionary_1"/>
+		</Consumer>		
+	</ConsumerList>
+</ConsumerGroup>
+
+<ChannelGroup>
+	<ChannelList>
+		<Channel>
+			<Name value="Channel_1"/>
+			<ChannelType value="ChannelType::RSSL_SOCKET"/>
+			<CompressionType value="CompressionType::None"/>
+			<GuaranteedOutputBuffers value="5000"/>
+			<ConnectionPingTimeout value="30000"/>
+			<TcpNodelay value="1"/>
+			<Host value="YOUR-ADS-IP-OR-HOST-NAME-GOES-HERE"/>
+			<Port value="14002"/>
+			<XmlTraceToStdout value="0"/>
+		</Channel>
+	</ChannelList>
+</ChannelGroup>
+
+</EmaConfig>
