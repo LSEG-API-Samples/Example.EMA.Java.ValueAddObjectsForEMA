@@ -1,0 +1,6 @@
+*.class
+/build.xml
+/manifest.mf
+/emaj.log.*
+/build/
+/dist/
