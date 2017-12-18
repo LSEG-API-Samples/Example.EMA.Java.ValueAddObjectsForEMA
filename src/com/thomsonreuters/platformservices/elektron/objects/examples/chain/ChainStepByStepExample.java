@@ -31,7 +31,7 @@ import static java.lang.System.out;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-class EmaChainToolkitExample
+class ChainStepByStepExample
 {
     // TREP or Elektron Service name used request chains and tiles
     // IMPORTANT NOTE:  You may need to change this value to match the
