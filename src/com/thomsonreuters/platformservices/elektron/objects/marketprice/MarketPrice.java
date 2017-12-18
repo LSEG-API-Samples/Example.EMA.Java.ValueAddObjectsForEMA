@@ -324,9 +324,9 @@ public interface MarketPrice extends Completable
          * Indicates if the <code>MarketPrice</code> must be opened synchronously.
          * If <code>withSynchronousMode</code> is not called, the <code>MarketPrice</code>
          * will be opened asynchronously.
-         * By default the autoDispatch mode is false meaning that the MarketPrice
-         * the {@link #open()} method will not dispatch events but just wait until
-         * the item is complete before returning control to the calling thread. 
+         * By default the autoDispatch mode is false meaning that the {@link #open()}
+         * method will not dispatch events but just wait until the item is 
+         * complete before returning control to the calling thread. 
          * This means that EMA events must be dispatch either from another 
          * application thread or from the EMA thread (see the API_DISPATCH EMA
          * operation model). 

@@ -14,18 +14,23 @@
 package com.thomsonreuters.platformservices.elektron.objects.chain;
 
 import com.thomsonreuters.ema.access.OmmConsumer;
+import com.thomsonreuters.platformservices.elektron.objects.common.Dispatcher;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
 class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListener
 {
+    private static final int WAITING_LOOP_TIMEOUT_IN_MS = 200;
+            
     private final OmmConsumer ommConsumer;
     private final String name;
     private final String serviceName;
     private final boolean withUpdates;
     private final SummaryLinksToSkipByDisplayTemplate summaryLinksToSkipByDisplayTemplate;
     private final int nameGuessesCount;
+    private final boolean synchronousModeActivated;
+    private final boolean autoDispatch;    
     private final OnElementAddedFunction onElementAddedFunction;
     private final OnElementChangedFunction onElementChangedFunction;
     private final OnElementRemovedFunction onElementRemovedFunction;
@@ -36,8 +41,8 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
     private enum State {OPENING, OPENED, CLOSING, CLOSED, IN_ERROR};
     private State state;
     private final Map<Long, String> elementsByPosition = new TreeMap<>();
+    private static Dispatcher dispatcher;    
     
-
     public FlatChainImpl(FlatChain.Builder builder)
     {
         ommConsumer = builder.ommConsumer;
@@ -46,6 +51,8 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
         withUpdates = builder.withUpdates;
         summaryLinksToSkipByDisplayTemplate = builder.summaryLinksToSkipByDisplayTemplate;
         nameGuessesCount = builder.nameGuessesCount;
+        synchronousModeActivated = builder.synchronousModeActivated;
+        autoDispatch = builder.autoDispatch;    
         onElementAddedFunction = builder.onElementAddedFunction;
         onElementChangedFunction = builder.onElementChangedFunction;
         onElementRemovedFunction = builder.onElementRemovedFunction;
@@ -57,6 +64,10 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
         chainRecordFactory = new ChainRecordFactoryImpl(chainRecordContext, chainRecordListener);         
         
         state = State.CLOSED;
+        
+        dispatcher = new Dispatcher.Builder()
+                .withOmmConsumer(ommConsumer)
+                .build();        
     }
 
     @Override
@@ -72,15 +83,23 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
     }
 
     @Override
-    public synchronized void open()
+    public void open()
     {
-        if(state == State.OPENED || state == State.OPENING || state == State.IN_ERROR)
-            return;
-        
-        state = State.OPENING;
+        synchronized(this)
+        {
+            if(state == State.OPENED || state == State.OPENING || state == State.IN_ERROR)
+                return;
 
-        firstChainRecord = chainRecordFactory.acquire(getName());
-        firstChainRecord.open();
+            state = State.OPENING;
+
+            firstChainRecord = chainRecordFactory.acquire(getName());
+            firstChainRecord.open();
+        }
+        
+        if(synchronousModeActivated)
+        {
+            waitForCompletion();
+        }        
     }
 
     @Override
@@ -237,5 +256,29 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
         {
             onCompleteFunction.onComplete(this);
         }
+    }
+    
+    /**
+     * Wait for the completion of this MarketPrice either by sleeping 
+     * (autoDispatch==false) or by dispatching events (autoDispatch==false)
+     */
+    private void waitForCompletion() 
+    {
+        do
+        {
+            if(autoDispatch)
+            {
+                dispatcher.dispatchEventsUntilComplete(this);
+            }
+            else
+            {
+                try 
+                {
+                    Thread.sleep(WAITING_LOOP_TIMEOUT_IN_MS);
+                } 
+                catch (InterruptedException exception) {}
+            }
+        } 
+        while (!isComplete());
     }
 }

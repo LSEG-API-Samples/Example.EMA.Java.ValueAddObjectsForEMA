@@ -14,6 +14,7 @@
 package com.thomsonreuters.platformservices.elektron.objects.chain;
 
 import com.thomsonreuters.ema.access.OmmConsumer;
+import com.thomsonreuters.platformservices.elektron.objects.common.Dispatcher;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -25,12 +26,16 @@ import java.util.TreeMap;
 
 class RecursiveChainImpl implements RecursiveChain
 {
+    private static final int WAITING_LOOP_TIMEOUT_IN_MS = 200;
+            
     private final OmmConsumer ommConsumer;
     private final String name;
     private final String serviceName;
     private final SummaryLinksToSkipByDisplayTemplate summaryLinksToSkipByDisplayTemplate;
     private final int nameGuessesCount;
     private final int maxDepth;
+    private final boolean synchronousModeActivated;
+    private final boolean autoDispatch;        
     private final OnElementAddedFunction onElementAddedFunction;
     private final OnCompleteFunction onCompleteFunction;
     private final OnErrorFunction onErrorFunction;
@@ -40,6 +45,7 @@ class RecursiveChainImpl implements RecursiveChain
     private final Map<RecursiveChain, Long> positionsBySubChain = new HashMap<>();
     private final boolean maxDepthReached;
     private boolean isComplete;
+    private static Dispatcher dispatcher; 
 
     public RecursiveChainImpl(RecursiveChain.Builder builder)
     {
@@ -49,6 +55,8 @@ class RecursiveChainImpl implements RecursiveChain
         summaryLinksToSkipByDisplayTemplate = builder.summaryLinksToSkipByDisplayTemplate;
         nameGuessesCount = builder.nameGuessesCount;
         maxDepth = builder.maxDepth;
+        synchronousModeActivated = builder.synchronousModeActivated;
+        autoDispatch = builder.autoDispatch;            
         onElementAddedFunction = builder.onElementAddedFunction;
         onCompleteFunction = builder.onCompleteFunction;
         onErrorFunction = builder.onErrorFunction;
@@ -59,6 +67,10 @@ class RecursiveChainImpl implements RecursiveChain
             maxDepthReached = true;
         else
             maxDepthReached = false;
+        
+        dispatcher = new Dispatcher.Builder()
+                .withOmmConsumer(ommConsumer)
+                .build();         
     }
     
     @Override
@@ -74,22 +86,30 @@ class RecursiveChainImpl implements RecursiveChain
     }
     
     @Override
-    public synchronized void open()
+    public void open()
     {
-        if(state == State.OPENED || state == State.OPENING || state == State.IN_ERROR)
-            return;
-        
-        state = State.OPENING;
-        
-        if(maxDepthReached)
+        synchronized(this)
         {
-            state = State.IN_ERROR;
-            onErrorFunction.onError("MaxDepth reached, sub-chain <" + name + "> will not be opened.", this);
-            onCompleteFunction.onComplete(this);
-            return;
+            if(state == State.OPENED || state == State.OPENING || state == State.IN_ERROR)
+                return;
+
+            state = State.OPENING;
+
+            if(maxDepthReached)
+            {
+                state = State.IN_ERROR;
+                onErrorFunction.onError("MaxDepth reached, sub-chain <" + name + "> will not be opened.", this);
+                onCompleteFunction.onComplete(this);
+                return;
+            }
+
+            currentDepthChain.open();
         }
         
-        currentDepthChain.open();
+        if(synchronousModeActivated)
+        {
+            waitForCompletion();
+        }                
     }
 
     @Override
@@ -403,5 +423,30 @@ class RecursiveChainImpl implements RecursiveChain
         LinkedList<String> elementNameInChain = new LinkedList<>();
         elementNameInChain.add(subChain.getName());
         return elementNameInChain;        
-    }    
+    }   
+    
+    /**
+     * Wait for the completion of this MarketPrice either by sleeping 
+     * (autoDispatch==false) or by dispatching events (autoDispatch==false)
+     */
+    private void waitForCompletion() 
+    {
+        do
+        {
+            if(autoDispatch)
+            {
+                dispatcher.dispatchEventsUntilComplete(this);
+            }
+            else
+            {
+                try 
+                {
+                    Thread.sleep(WAITING_LOOP_TIMEOUT_IN_MS);
+                } 
+                catch (InterruptedException exception) {}
+            }
+        } 
+        while (!isComplete());
+    }
+    
 }

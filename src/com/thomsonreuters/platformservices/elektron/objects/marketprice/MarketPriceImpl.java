@@ -35,6 +35,7 @@ import com.thomsonreuters.ema.access.UpdateMsg;
 import com.thomsonreuters.ema.rdm.DataDictionary;
 import com.thomsonreuters.ema.rdm.DictionaryUtility;
 import com.thomsonreuters.ema.rdm.EmaRdm;
+import com.thomsonreuters.platformservices.elektron.objects.common.Dispatcher;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -71,7 +72,8 @@ class MarketPriceImpl implements MarketPrice, OmmConsumerClient
     private long subscriptionHandle;
     private OmmState ommState;
     private final Map<Integer, Field> fieldsById = new TreeMap<>();    
-    private final Map<String, Field> fieldsByName = new TreeMap<>();    
+    private final Map<String, Field> fieldsByName = new TreeMap<>();  
+    private static Dispatcher dispatcher; 
 
     /**
      * Constructor used by the <code>MarketPrice.Builder</code> to build a new 
@@ -97,6 +99,10 @@ class MarketPriceImpl implements MarketPrice, OmmConsumerClient
         onStateFunction = builder.onStateFunction;
         
         state = State.CLOSED;
+        
+        dispatcher = new Dispatcher.Builder()
+                .withOmmConsumer(ommConsumer)
+                .build();        
     }
 
     @Override
@@ -337,7 +343,7 @@ class MarketPriceImpl implements MarketPrice, OmmConsumerClient
         {
             if(autoDispatch)
             {
-                ommConsumer.dispatch(WAITING_LOOP_TIMEOUT_IN_MS);
+                dispatcher.dispatchEventsUntilComplete(this);
             }
             else
             {

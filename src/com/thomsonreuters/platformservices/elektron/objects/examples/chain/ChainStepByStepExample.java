@@ -18,7 +18,7 @@ package com.thomsonreuters.platformservices.elektron.objects.examples.chain;
 import com.thomsonreuters.ema.access.EmaFactory;
 import com.thomsonreuters.ema.access.OmmConsumer;
 import com.thomsonreuters.ema.access.OmmConsumerConfig;
-import static com.thomsonreuters.ema.access.OmmConsumerConfig.OperationModel.USER_DISPATCH;
+import com.thomsonreuters.ema.access.OmmConsumerConfig.OperationModel;
 import com.thomsonreuters.ema.access.OmmException;
 import com.thomsonreuters.platformservices.elektron.objects.chain.FlatChain;
 import com.thomsonreuters.platformservices.elektron.objects.chain.RecursiveChain;
@@ -46,6 +46,10 @@ class ChainStepByStepExample
     // team of your company. 
     private static final String DACS_USER_NAME = "";
 
+    // Indicate is MarketPrice objects must dispatch EMA events themselves or
+    // not when they are built using the synchronous mode.
+    private static final boolean AUTO_DISPATCH = true;
+
     // The OmmConsumer used to request the chains
     private static OmmConsumer ommConsumer;
     private static int operationModel = OmmConsumerConfig.OperationModel.USER_DISPATCH;
@@ -71,30 +75,46 @@ class ChainStepByStepExample
         System.out.println("| The application starts by creating an EMA OmmConsumer and uses it with the  |");
         System.out.println("| chain value add objects to expand a number of different chains,             |");
         System.out.println("| demonstrating the implemented capabilities. Chain examples are executed one |");
-        System.out.println("| by one in 10 individual steps.  Before each step, explanatory text is       |");
+        System.out.println("| by one in 12 individual steps.  Before each step, explanatory text is       |");
         System.out.println("| displayed and you are prompted to press <Enter> to start the step.          |");
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println();
 
-        createOmmConsumer();
+        // Steps using an OmmConsumer configured with the USER_DISPATCH OperationModel
+        {
+            createOmmConsumer(operationModel);
 
-        // Dispatcher used by the Steps to dispatch events from the main thread
-        dispatcher = new Dispatcher.Builder()
-                .withOmmConsumer(ommConsumer)
-                .build();
-                    
-        openAChainAndDisplayElementNamesWhenFinished_1();  
-        openAChainAndDisplayElementNamesWhenFinished_2();
-        openAChainAndDisplayElementsNamesAsSoonAsTheyAreDetected();
-        openAChainAndSkipSummaryLinks();
-        openAVeryLongChain();
-        openAVeryLongChainWithTheOptimizedAlgorithm();
-        openChainWithUpdates();
-        openARecursiveChain();
-        openARecursiveChainWithMaxDepth();
-        openAChainThatDoesntExist();
-                    
-        uninitializeOmmConsumer();
+            // Dispatcher used by the Steps to dispatch events from the main thread
+            dispatcher = new Dispatcher.Builder()
+                    .withOmmConsumer(ommConsumer)
+                    .build();
+
+            openAChainAndDisplayElementNamesWhenFinished_1();  
+            openAChainAndDisplayElementNamesWhenFinished_2();
+            openAChainAndDisplayElementsNamesAsSoonAsTheyAreDetected();
+            openAChainAndSkipSummaryLinks();
+            openAVeryLongChain();
+            openAVeryLongChainWithTheOptimizedAlgorithm();
+            openChainWithUpdates();
+            openARecursiveChain();
+            openARecursiveChainWithMaxDepth();
+            openAChainThatDoesntExist();
+            openAChain_SynchronousMode_UserDispatch();
+
+            uninitializeOmmConsumer();
+            dispatcher = null;
+        }
+        
+        // Steps using an OmmConsumer configured with the API_DISPATCH OperationModel
+        // No Dispatcher is required as it's an EMA thread that dispatches events
+        {
+            createOmmConsumer(OperationModel.API_DISPATCH);
+            
+            openAChain_SynchronousMode_ApiDispatch();
+            
+            uninitializeOmmConsumer();
+        }
+        
  
         System.out.println("  >>> Exiting the application");
     }
@@ -103,7 +123,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 1/10 - openAChainAndDisplayElementNamesWhenFinished_1()");
+        System.out.println("  . 1/12 - openAChainAndDisplayElementNamesWhenFinished_1()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the Dow Jones chain. When the chain decoding is");
         System.out.println("  . completed we display the names of all elements that constitute this chain.");
@@ -144,7 +164,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 2/10 - openAChainAndDisplayElementNamesWhenFinished_2()");
+        System.out.println("  . 2/12 - openAChainAndDisplayElementNamesWhenFinished_2()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the Dow Jones chain and display its elements names");
         System.out.println("  . when the chain is complete. This step displays the exact same information");
@@ -184,7 +204,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 3/10 - openAChainAndDisplayElementsNamesAsSoonAsTheyAreDetected()");
+        System.out.println("  . 3/12 - openAChainAndDisplayElementsNamesAsSoonAsTheyAreDetected()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the Dow Jones chain and display the name of new");
         System.out.println("  . elements as soon as they are detected by the decoding algorithm. To this");
@@ -220,7 +240,7 @@ class ChainStepByStepExample
                 
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 4/10 - openAChainAndSkipSummaryLinks()");
+        System.out.println("  . 4/12 - openAChainAndSkipSummaryLinks()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the Dow Jones chain once again, but this time we skip");
         System.out.println("  . the summary links. As the Dow Jones chain has one summary link, the chain ");
@@ -270,7 +290,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 5/10 - openAVeryLongChain()");
+        System.out.println("  . 5/12 - openAVeryLongChain()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the NASDAQ BASIC chain that contains more than 8000 ");
         System.out.println("  . elements. This kind of chain may take more than 20 seconds to open with the");
@@ -318,7 +338,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 6/10 - openAVeryLongChainWithTheOptimizedAlgorithm()");
+        System.out.println("  . 6/12 - openAVeryLongChainWithTheOptimizedAlgorithm()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the NASDAQ BASIC chain with the optimized decoding");
         System.out.println("  . algorithm. You should observe much better performance than with the normal");
@@ -366,7 +386,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 7/10 - openChainWithUpdates()");
+        System.out.println("  . 7/12 - openChainWithUpdates()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the \"NYSE Active Volume leaders\" tile (.AV.O), this");
         System.out.println("  . type of chain that updates very frequently. Tiles follow the same naming");
@@ -442,7 +462,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 8/10 - openARecursiveChain()");
+        System.out.println("  . 8/12 - openARecursiveChain()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the chain for the Equity Japanese Contracts (0#JP-EQ).");
         System.out.println("  . This chain contains elements that are also chains. In this step we use a ");
@@ -490,7 +510,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 9/10 - openARecursiveChainWithMaxDepth()");
+        System.out.println("  . 9/12 - openARecursiveChainWithMaxDepth()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we recursively open the chain for the Equity Japanese");
         System.out.println("  . Contracts (0#JP-EQ) and we limit the recursion depth to 2 levels.");
@@ -535,7 +555,7 @@ class ChainStepByStepExample
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  . 10/10 - openAChainThatDoesntExist()");
+        System.out.println("  . 10/12 - openAChainThatDoesntExist()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we try to open a chain that doesn't exist and display the ");
         System.out.println("  . error detected by the decoding algorithm.");
@@ -561,20 +581,133 @@ class ChainStepByStepExample
         theChain.close();        
     }
     
-    private static void createOmmConsumer()
+    private static void openAChain_SynchronousMode_UserDispatch()
     {
         System.out.println();
         System.out.println("  ..............................................................................");
-        System.out.println("  >>> Creating the OmmConsumer");
+        System.out.println("  . 11/12 - openAChain_SynchronousMode_UserDispatch()");
+        System.out.println("  ..............................................................................");
+        System.out.println("  . In this step, we show how to open a Chain in synchronous mode. In");
+        System.out.println("  . this mode, the open() method is blocking and only returns once the");
+        System.out.println("  . Chain is complete.");
+        System.out.println("  . For the purpose of this demonstration, we build a FlatChain with the");
+        System.out.println("  . SynchronousMode activated and, as soon as the open() method returns, we");
+        System.out.println("  . display the names of all elements that constitute this chain..");
+        System.out.println("  . It is important to note that the OmmConsumer object used for this step");
+        System.out.println("  . has been built using the USER_DISPATCH EMA operation model. For this reason");
+        System.out.println("  . the FlatChain object is built with the synchronous mode activated but ");
+        System.out.println("  . also with the autodispatch parameter set to true. Thanks to this parameter");
+        System.out.println("  . the open method of the FlatChain will dispatch EMA events until it is complete.");
+        System.out.println();              
+        waitForKeyPress();
+               
+        FlatChain theChain = new FlatChain.Builder()
+                .withOmmConsumer(ommConsumer)
+                .withChainName("0#.DJI")
+                .withServiceName(SERVICE_NAME)
+                .withSynchronousMode(AUTO_DISPATCH)
+                .onError(
+                        (errorMessage, chain) -> 
+                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                )
+                .build();
+        
+        System.out.println("    >>> Opening <" + theChain.getName() + ">");
+        theChain.open();                                    
+        
+        // Display the chain elements after the dispatch loop exited because the 
+        // chain is complete.   
+        theChain.getElements().forEach(
+                (position, name) ->
+                        System.out.println("\t" + theChain.getName() + "[" + position + "] = " + name)
+        );
+        
+        System.out.println("    >>> Closing <" + theChain.getName() + ">");
+        theChain.close();        
+    }    
+    
+    
+    private static void openAChain_SynchronousMode_ApiDispatch()
+    {
+        System.out.println();
+        System.out.println("  ..............................................................................");
+        System.out.println("  . 12/12 - openAChain_SynchronousMode_UserDispatch()");
+        System.out.println("  ..............................................................................");
+        System.out.println("  . In this step, we show how to open a Chain in synchronous mode. In");
+        System.out.println("  . this mode, the open() method is blocking and only returns once the");
+        System.out.println("  . Chain is complete.");
+        System.out.println("  . For the purpose of this demonstration, we build a FlatChain with the");
+        System.out.println("  . SynchronousMode activated and, as soon as the open() method returns, we");
+        System.out.println("  . display the names of all elements that constitute this chain..");
+        System.out.println("  . It is important to note that the OmmConsumer object used for this step");
+        System.out.println("  . has been built using the API_DISPATCH EMA operation model. For this reason");
+        System.out.println("  . the FlatChain object is built with the synchronous mode activated but ");
+        System.out.println("  . also with the autodispatch parameter set to false. Thanks to this parameter");
+        System.out.println("  . the open method of the FlatChain will not dispatch EMA events but sleep ");
+        System.out.println("  . instead until it is complete.");
+        System.out.println();              
+        waitForKeyPress();
+               
+        FlatChain theChain = new FlatChain.Builder()
+                .withOmmConsumer(ommConsumer)
+                .withChainName("0#.DJI")
+                .withServiceName(SERVICE_NAME)
+                .withSynchronousMode(!AUTO_DISPATCH)
+                .onError(
+                        (errorMessage, chain) -> 
+                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                )
+                .build();
+        
+        System.out.println("    >>> Opening <" + theChain.getName() + ">");
+        theChain.open();                                    
+        
+        // Display the chain elements after the dispatch loop exited because the 
+        // chain is complete.   
+        theChain.getElements().forEach(
+                (position, name) ->
+                        System.out.println("\t" + theChain.getName() + "[" + position + "] = " + name)
+        );
+        
+        System.out.println("    >>> Closing <" + theChain.getName() + ">");
+        theChain.close();        
+    }    
+    
+    /**
+     * Creates the <code>OmmConsumer</code> used by the different steps of this 
+     * example application. This method only sets the operation model and user 
+     * name used by the OmmConsumer. Other parameters must be set via the 
+     * EmaConfig.xml configuration file that comes with this application.
+     * @param operationModel the EMA operation model the OmmConsumer should use.
+     * It can be either <code>OperationModel.API_DISPATCH</code> or
+     * <code>OperationModel.USER_DISPATCH</code>
+     * @return the created <code>OmmConsumer</code>.
+     */     
+    private static void createOmmConsumer(int operationModel)
+    {
+        String operationModelName;
+        if(operationModel == OperationModel.API_DISPATCH)
+        {
+            operationModelName = "API_DISPATCH";
+        }
+        else
+        {
+            operationModelName = "USER_DISPATCH";
+        }
+        
+        out.println();
+        out.println("  .............................................................................");
+        out.println("  >>> Creating the OmmConsumer ("+ operationModelName +")");
         
         if(ommConsumer != null)
             return;
         
+        ChainStepByStepExample.operationModel = operationModel;
+        
         try
         {
             OmmConsumerConfig config = EmaFactory.createOmmConsumerConfig()
-                    .consumerName("Consumer_1")
-                    .operationModel(USER_DISPATCH);
+                    .operationModel(operationModel);
             
             if(!DACS_USER_NAME.isEmpty())
             {
@@ -585,12 +718,11 @@ class ChainStepByStepExample
         } 
         catch (OmmException exception)
         {
-            System.out.println("      ERROR - Can't create the OmmConsumer because of the following error: " + exception.getMessage());
-            System.out.println("  >>> Exiting the application");
+            out.println("      ERROR - Can't create the OmmConsumer because of the following error: " + exception.getMessage());
+            out.println("  >>> Exiting the application");
             exit(-1);
-        }                
-            
-    }
+        }                       
+    }    
     
     private static void uninitializeOmmConsumer()
     {

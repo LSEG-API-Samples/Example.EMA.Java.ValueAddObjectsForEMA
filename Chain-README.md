@@ -21,17 +21,17 @@ This is an example of the *ChainStepByStepExample* output for each step:
     |                                                                             |
     | The application starts by creating an EMA OmmConsumer and uses it with the  |
     | toolkit to expand a number of different chains, demonstrating the           |
-    | implemented capabilities. The chains are expanded one by one in 10          |
+    | implemented capabilities. The chains are expanded one by one in 12          |
     | individual steps. For each step an explanatory text is displayed and you    |
     | are prompted to press <Enter> to start the step.                            |
     -------------------------------------------------------------------------------
 
 
       ..............................................................................
-      >>> Creating the OmmConsumer
+      >>> Creating the OmmConsumer (USER_DISPATCH)
 
       ..............................................................................
-      . 1/10 - openAChainAndDisplayElementNamesWhenFinished_1()
+      . 1/12 - openAChainAndDisplayElementNamesWhenFinished_1()
       ..............................................................................
       . In this step we open the Dow Jones chain. When the chain decoding is
       . completed we display the names of all elements that constitute this chain.
@@ -78,7 +78,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#.DJI>
 
       ..............................................................................
-      . 2/10 - openAChainAndDisplayElementNamesWhenFinished_2()
+      . 2/12 - openAChainAndDisplayElementNamesWhenFinished_2()
       ..............................................................................
       . In this step we open the Dow Jones chain and display its elements names
       . when the chain is complete. This step displays the exact same information
@@ -124,7 +124,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#.DJI>
 
       ..............................................................................
-      . 3/10 - openAChainAndDisplayElementsNamesAsSoonAsTheyAreDetected()
+      . 3/12 - openAChainAndDisplayElementsNamesAsSoonAsTheyAreDetected()
       ..............................................................................
       . In this step we open the Dow Jones chain and display the name of new
       . elements as soon as they are detected by the decoding algorithm. To this
@@ -168,7 +168,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#.DJI>
 
       ..............................................................................
-      . 4/10 - openAChainAndSkipSummaryLinks()
+      . 4/12 - openAChainAndSkipSummaryLinks()
       ..............................................................................
       . In this step we open the Dow Jones chain once again, but this time we skip
       . the summary links. As the Dow Jones chain as one summary link, the chain 
@@ -216,7 +216,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#.DJI>
 
       ..............................................................................
-      . 5/10 - openAVeryLongChain()
+      . 5/12 - openAVeryLongChain()
       ..............................................................................
       . In this step we open the NASDAQ BASIC chain that contains more than 8000 
       . elements. This kind of chain may take more than 20 seconds to open with the
@@ -239,7 +239,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#UNIVERSE.NB>
 
       ..............................................................................
-      . 6/10 - openAVeryLongChainWithTheOptimizedAlgorithm()
+      . 6/12 - openAVeryLongChainWithTheOptimizedAlgorithm()
       ..............................................................................
       . In this step we open the NASDAQ BASIC chain with the optimized decoding
       . algorithm. You should observe much better performance than with the normal
@@ -261,7 +261,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#UNIVERSE.NB>
 
       ..............................................................................
-      . 7/10 - openChainWithUpdates()
+      . 7/12 - openChainWithUpdates()
       ..............................................................................
       . In this step we open the "NYSE Active Volume leaders" tile (.AV.O), this
       . type of chain that updates very frequently. Tiles follow the same naming
@@ -370,7 +370,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <.AV.O>
 
       ..............................................................................
-      . 8/10 - openARecursiveChain()
+      . 8/12 - openARecursiveChain()
       ..............................................................................
       . In this step we open the chain for the Equity Japanese Contracts (0#JP-EQ).
       . This chain contains elements that are also chains. In this step we use a 
@@ -407,7 +407,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#JP-EQ>
 
       ..............................................................................
-      . 9/10 - openARecursiveChainWithMaxDepth()
+      . 9/12 - openARecursiveChainWithMaxDepth()
       ..............................................................................
       . In this step we recursively open the chain for the Equity Japanese
       . Contracts (0#JP-EQ) and we limit the recursion depth to 2 levels.
@@ -434,7 +434,7 @@ This is an example of the *ChainStepByStepExample* output for each step:
         >>> Closing <0#JP-EQ>
 
       ..............................................................................
-      . 10/10 - openAChainThatDoesntExist()
+      . 10/12 - openAChainThatDoesntExist()
       ..............................................................................
       . In this step we try to open a chain that doesn't exist and display the 
       . error detected by the decoding algorithm.
@@ -446,6 +446,118 @@ This is an example of the *ChainStepByStepExample* output for each step:
             Error received for <THIS_CHAIN_DOESNT_EXIST>: Invalid status received for <THIS_CHAIN_DOESNT_EXIST>: Closed / Suspect / Not found / '*The record could not be found'
         >>> Closing <THIS_CHAIN_DOESNT_EXIST>
 
-      ..............................................................................
-      >>> Uninitializing the OmmConsumer
-      >>> Exiting the application
+	  ..............................................................................
+	  . 11/12 - openAChain_SynchronousMode_UserDispatch()
+	  ..............................................................................
+	  . In this step, we show how to open a Chain in synchronous mode. In
+	  . this mode, the open() method is blocking and only returns once the
+	  . Chain is complete.
+	  . For the purpose of this demonstration, we build a FlatChain with the
+	  . SynchronousMode activated and, as soon as the open() method returns, we
+	  . display the names of all elements that constitute this chain..
+	  . It is important to note that the OmmConsumer object used for this step
+	  . has been built using the USER_DISPATCH EMA operation model. For this reason
+	  . the FlatChain object is built with the synchronous mode activated but
+	  . also with the autodispatch parameter set to true. Thanks to this parameter
+	  . the open method of the FlatChain will dispatch EMA events until it is complete.
+
+	    <<< Press <Enter> to continue...
+
+	    >>> Opening <0#.DJI>
+	        0#.DJI[0] = .DJI
+	        0#.DJI[1] = AAPL.OQ
+	        0#.DJI[2] = AXP.N
+	        0#.DJI[3] = BA.N
+	        0#.DJI[4] = CAT.N
+	        0#.DJI[5] = CSCO.OQ
+	        0#.DJI[6] = CVX.N
+	        0#.DJI[7] = DIS.N
+	        0#.DJI[8] = DWDP.N
+	        0#.DJI[9] = GE.N
+	        0#.DJI[10] = GS.N
+	        0#.DJI[11] = HD.N
+	        0#.DJI[12] = IBM.N
+	        0#.DJI[13] = INTC.OQ
+	        0#.DJI[14] = JNJ.N
+	        0#.DJI[15] = JPM.N
+	        0#.DJI[16] = KO.N
+	        0#.DJI[17] = MCD.N
+	        0#.DJI[18] = MMM.N
+	        0#.DJI[19] = MRK.N
+	        0#.DJI[20] = MSFT.OQ
+	        0#.DJI[21] = NKE.N
+	        0#.DJI[22] = PFE.N
+	        0#.DJI[23] = PG.N
+	        0#.DJI[24] = TRV.N
+	        0#.DJI[25] = UNH.N
+	        0#.DJI[26] = UTX.N
+	        0#.DJI[27] = V.N
+	        0#.DJI[28] = VZ.N
+	        0#.DJI[29] = WMT.N
+	        0#.DJI[30] = XOM.N
+	    >>> Closing <0#.DJI>
+
+	  ..............................................................................
+
+	  >>> Uninitializing the OmmConsumer
+
+	  .............................................................................
+	  >>> Creating the OmmConsumer (API_DISPATCH)
+
+	  ..............................................................................
+
+	  . 12/12 - openAChain_SynchronousMode_UserDispatch()
+	  ..............................................................................
+	  . In this step, we show how to open a Chain in synchronous mode. In
+	  . this mode, the open() method is blocking and only returns once the
+	  . Chain is complete.
+	  . For the purpose of this demonstration, we build a FlatChain with the
+	  . SynchronousMode activated and, as soon as the open() method returns, we
+	  . display the names of all elements that constitute this chain..
+	  . It is important to note that the OmmConsumer object used for this step
+	  . has been built using the API_DISPATCH EMA operation model. For this reason
+	  . the FlatChain object is built with the synchronous mode activated but
+	  . also with the autodispatch parameter set to false. Thanks to this parameter
+	  . the open method of the FlatChain will not dispatch EMA events but sleep
+	  . instead until it is complete.
+
+	    <<< Press <Enter> to continue...
+
+	    >>> Opening <0#.DJI>
+	        0#.DJI[0] = .DJI
+	        0#.DJI[1] = AAPL.OQ
+	        0#.DJI[2] = AXP.N
+	        0#.DJI[3] = BA.N
+	        0#.DJI[4] = CAT.N
+	        0#.DJI[5] = CSCO.OQ
+	        0#.DJI[6] = CVX.N
+	        0#.DJI[7] = DIS.N
+	        0#.DJI[8] = DWDP.N
+	        0#.DJI[9] = GE.N
+	        0#.DJI[10] = GS.N
+	        0#.DJI[11] = HD.N
+	        0#.DJI[12] = IBM.N
+	        0#.DJI[13] = INTC.OQ
+	        0#.DJI[14] = JNJ.N
+	        0#.DJI[15] = JPM.N
+	        0#.DJI[16] = KO.N
+	        0#.DJI[17] = MCD.N
+	        0#.DJI[18] = MMM.N
+	        0#.DJI[19] = MRK.N
+	        0#.DJI[20] = MSFT.OQ
+	        0#.DJI[21] = NKE.N
+	        0#.DJI[22] = PFE.N
+	        0#.DJI[23] = PG.N
+	        0#.DJI[24] = TRV.N
+	        0#.DJI[25] = UNH.N
+	        0#.DJI[26] = UTX.N
+	        0#.DJI[27] = V.N
+	        0#.DJI[28] = VZ.N
+	        0#.DJI[29] = WMT.N
+	        0#.DJI[30] = XOM.N
+	    >>> Closing <0#.DJI>
+
+	  ..............................................................................
+
+	  >>> Uninitializing the OmmConsumer
+	  >>> Exiting the application

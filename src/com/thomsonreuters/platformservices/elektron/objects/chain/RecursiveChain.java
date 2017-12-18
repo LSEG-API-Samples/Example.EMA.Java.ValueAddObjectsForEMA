@@ -213,6 +213,8 @@ public interface RecursiveChain extends Chain
         SummaryLinksToSkipByDisplayTemplate summaryLinksToSkipByDisplayTemplate;
         int nameGuessesCount;
         int maxDepth = -1;
+        boolean synchronousModeActivated;
+        boolean autoDispatch;        
         OnElementAddedFunction onElementAddedFunction = (position, path, chain) ->{};
         OnCompleteFunction onCompleteFunction = (chain) -> {};
         OnErrorFunction onErrorFunction = (errorMessage, chain) -> {};
@@ -336,7 +338,48 @@ public interface RecursiveChain extends Chain
             this.maxDepth = maxDepth;
             return this;
         }
-
+        
+        /**
+         * Indicates if the <code>RecursiveChain</code> must be opened synchronously.
+         * If <code>withSynchronousMode</code> is not called, the <code>RecursiveChain</code>
+         * will be opened asynchronously.
+         * By default the autoDispatch mode is false meaning that the {@link #open()} 
+         * method will not dispatch events but just wait until the item is 
+         * complete before returning control to the calling thread. 
+         * This means that EMA events must be dispatch either from another 
+         * application thread or from the EMA thread (see the API_DISPATCH EMA
+         * operation model). 
+         * @return this <code>Builder</code> so that you can chain other <code>Builder</code>
+         * methods calls.
+         */
+        public Builder withSynchronousMode()
+        {
+            boolean autoDispatch = false;
+            return withSynchronousMode(autoDispatch);
+        }
+        
+        /**
+         * Indicates if the <code>RecursiveChain</code> must be opened synchronously.
+         * If <code>withSynchronousMode</code> is not called, the <code>RecursiveChain</code>
+         * will be opened asynchronously.
+         * @param autoDispatch indicates if the <code>RecursiveChain</code> will have to dispatch
+         * EMA events when the {@link #open()} method is called (see the 
+         * USER_DISPATCH EMA operation model) or if these events will be dispatched 
+         * by another thread. In the later case, the {@link #open()} method 
+         * will not dispatch events but just wait until the item is complete. 
+         * This means that EMA events must be dispatch either from another 
+         * application thread or from the EMA thread (see the API_DISPATCH EMA
+         * operation model). 
+         * @return this <code>Builder</code> so that you can chain other <code>Builder</code>
+         * methods calls.
+         */
+        public Builder withSynchronousMode(boolean autoDispatch)
+        {
+            this.synchronousModeActivated = true;
+            this.autoDispatch = autoDispatch;
+            return this;
+        }
+        
         /**
          * Sets the function to be called when the chain decodes a new element. 
          * @param function function to be called on new elements.

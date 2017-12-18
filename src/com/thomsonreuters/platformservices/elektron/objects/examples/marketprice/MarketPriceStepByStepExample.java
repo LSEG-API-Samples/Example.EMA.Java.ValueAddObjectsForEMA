@@ -96,8 +96,8 @@ class MarketPriceStepByStepExample
             openAMarketPrice_And_DisplayFieldsById();
             openAMarketPrice_And_DisplayCachedFieldsEvery2Seconds();
             openAMarketPriceWithoutUpdates_And_DisplayFieldsOnImage();
-            openAMarketPriceWithoutUpdates_And_DisplayFields_SynchronousMode_AutoDispatchTrue();
-            openAMarketPrice_And_DisplayCachedFieldsEvery2Seconds_SynchronousMode_AutoDispatchFalse();
+            openAMarketPriceWithoutUpdates_And_DisplayFields_SynchronousMode_UserDispatch();
+            openAMarketPrice_And_DisplayCachedFieldsEvery2Seconds_SynchronousMode_UserDispatch();
             openAMarkePriceWithPartialUpdates();
             openAMarkePriceWithAViewDefinedWithFieldIds();
             // openAMarkePriceWithAViewDefinedWithFieldNames();
@@ -583,11 +583,11 @@ class MarketPriceStepByStepExample
     /**
      * Example step 11
      */    
-    private static void openAMarketPriceWithoutUpdates_And_DisplayFields_SynchronousMode_AutoDispatchTrue()
+    private static void openAMarketPriceWithoutUpdates_And_DisplayFields_SynchronousMode_UserDispatch()
     {
         out.println();
         out.println("  .............................................................................");
-        out.println("  . 11/17 - openAMarketPriceWithoutUpdates_And_DisplayFields_SynchronousMode_AutoDispatchTrue()");
+        out.println("  . 11/17 - openAMarketPriceWithoutUpdates_And_DisplayFields_SynchronousMode_UserDispatch()");
         out.println("  .............................................................................");
         out.println("  . In this step, we show how to open a MarketPrice in synchronous mode. In");
         out.println("  . this mode, the open() method is blocking and only returns once the");
@@ -627,11 +627,11 @@ class MarketPriceStepByStepExample
     /**
      * Example step 12
      */    
-    private static void openAMarketPrice_And_DisplayCachedFieldsEvery2Seconds_SynchronousMode_AutoDispatchFalse()
+    private static void openAMarketPrice_And_DisplayCachedFieldsEvery2Seconds_SynchronousMode_UserDispatch()
     {
         out.println();
         out.println("  .............................................................................");
-        out.println("  . 12/17 - openAMarketPrice_And_DisplayCachedFieldsEvery2Seconds_SynchronousMode_AutoDispatchFalse()");
+        out.println("  . 12/17 - openAMarketPrice_And_DisplayCachedFieldsEvery2Seconds_SynchronousMode_UserDispatch()");
         out.println("  .............................................................................");
         out.println("  . This step demonstrates that even if you built the MarkePrice with the");
         out.println("  . synchronous mode activated, you continue to benefit from the automatic");
