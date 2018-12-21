@@ -21,7 +21,7 @@
 			<GuaranteedOutputBuffers value="5000"/>
 			<ConnectionPingTimeout value="30000"/>
 			<TcpNodelay value="1"/>
-			<Host value="10.67.4.28"/>
+			<Host value="YOUR-ADS-IP-OR-HOST-NAME-GOES-HERE"/>
 			<Port value="14002"/>
 			<XmlTraceToStdout value="0"/>
 		</Channel>
