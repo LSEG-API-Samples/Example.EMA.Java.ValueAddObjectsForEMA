@@ -74,7 +74,7 @@ function build
    fi
 
    printf "Building jar files...\n"
-   $JAR cfm $DISTDIR/ValueAddObjectsForEMA.jar Manifest321.txt -C build/classes .; ret=$?
+   $JAR cfm $DISTDIR/ValueAddObjectsForEMA.jar Manifest$ETA_EMA_VERSION.txt -C build/classes .; ret=$?
    if [ $ret != 0 ]; then
       printf "Build failed.  Exiting\n"
       exit $ret

@@ -33,7 +33,7 @@ class MarketPriceStepByStepExample
     // TREP or Elektron Service name used request MarketPrice instruments
     // IMPORTANT NOTE:  You may need to change this value to match the
     // appropriate service name to be used in your environment
-    private static final String SERVICE_NAME = "ELEKTRON_DD";
+    private static final String SERVICE_NAME = "ELEKTRON_EDGE";
     
     // If the Data Access Control System (DACS) is activated on your TREP 
     // and if your DACS username is different than your operating system user 

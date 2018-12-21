@@ -52,7 +52,7 @@ echo Building the ChainStepByStepExample application...
 if %errorlevel% neq 0 goto :ERROR
 
 echo Building jar files...
-%JAR% cfm %DISTDIR%\ValueAddObjectsForEMA.jar Manifest321.txt -C build\classes .
+%JAR% cfm %DISTDIR%\ValueAddObjectsForEMA.jar Manifest-%ETA_EMA_VERSION%.txt -C build\classes .
 %JAR% cf %DISTDIR%\ValueAddObjectsForEMA-javadoc.jar -C %JAVADOCDIR% .
 if %errorlevel% neq 0 goto :ERROR
 
