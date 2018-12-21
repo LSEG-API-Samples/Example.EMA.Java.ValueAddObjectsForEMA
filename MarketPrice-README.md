@@ -2,7 +2,7 @@
 
 **Before you start the application** you must configure the *EmaConfig.xml file* to specify the host name of the server (the TREP or Elektron platform) to which the EMA connects. This is set thanks to the value of the *\<ChannelGroup>\<ChannelList>\<Channel>\<Host>* node. This value can be a remote host name or IP address.
 
-To start the *MarketPriceStepByStepExample* run the *marketprice-stepbystep-example.bat* or the *marketprice-stepbystep-example.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
+To start the *MarketPriceStepByStepExample* run the *marketprice-stepbystep-example-with-esdk.x.x.x.bat* or the *marketprice-stepbystep-example-with-esdk.x.x.x.ksh* script matching the version of your Elektron SDK. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
 
 ## Expected output
 

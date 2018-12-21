@@ -82,7 +82,10 @@ The *MarketPriceStepByStepExample.java* file and  *ChainStepByStepExample.java* 
 
 ### Run the *build* script
 
-Once these environment variables setup and hardcoded values are properly set, you must run the *build.bat* or the *build.ksh* script to build the _ValueAddObjectsForEMA_ example library and the related example applications.
+Once these environment variables setup and hardcoded values are properly set, you must run the *build-with-esdk-x.x.x.bat* or the *build-with-esdk-x.x.x.ksh* script to build the _ValueAddObjectsForEMA_ example library and the related example applications. 
+
+_**Note:** The build script to be used must match the version of your installed Elektron SDK. For example: If you installed Elektron SDK 1.1.1 on a Windows machine then you should use the "build-with-esdk-1.1.x.bat" script. On the other hand, if you installed Elektron SDK 1.2.2 on a Linux machine then you should use the "build-with-esdk-1.2.2.ksh" script._
+ 
 
 #### Expected output
 

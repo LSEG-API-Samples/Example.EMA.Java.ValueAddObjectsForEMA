@@ -14,6 +14,7 @@ fi
 JAVADOCDIR=dist/javadoc
 DISTDIR=dist
 
+ETA_EMA_VERSION=$1
 EMA_HOME=$ELEKTRON_JAVA_HOME/Java/Ema
 ETA_HOME=$ELEKTRON_JAVA_HOME/Java/Eta
 EMA_BINARY_PACK=$ELEKTRON_JAVA_HOME/Elektron-SDK-BinaryPack/Java/Ema
@@ -23,7 +24,7 @@ JAVAC=$JAVA_HOME/bin/javac
 JAVADOC=$JAVA_HOME/bin/javadoc
 JAR=$JAVA_HOME/bin/jar
 
-CLASSPATH=./src:$EMA_HOME/Libs/ema-3.2.1.0.jar:$EMA_BINARY_PACK/Libs/SLF4J/slf4j-1.7.12/slf4j-api-1.7.12.jar:$EMA_BINARY_PACK/Libs/SLF4J/slf4j-1.7.12/slf4j-jdk14-1.7.12.jar:$EMA_BINARY_PACK/Libs/apache/commons-configuration-1.10.jar:$EMA_BINARY_PACK/Libs/apache/commons-logging-1.2.jar:$EMA_BINARY_PACK/Libs/apache/commons-lang-2.6.jar:$EMA_BINARY_PACK/Libs/apache/commons-collections-3.2.2.jar:$ETA_HOME/Libs/upa-3.2.1.0.jar:$ETA_HOME/Libs/upaValueAdd-3.2.1.0.jar
+CLASSPATH=./src:$EMA_HOME/Libs/ema-$ETA_EMA_VERSION.jar:$EMA_BINARY_PACK/Libs/SLF4J/slf4j-1.7.12/slf4j-api-1.7.12.jar:$EMA_BINARY_PACK/Libs/SLF4J/slf4j-1.7.12/slf4j-jdk14-1.7.12.jar:$EMA_BINARY_PACK/Libs/apache/commons-configuration-1.10.jar:$EMA_BINARY_PACK/Libs/apache/commons-logging-1.2.jar:$EMA_BINARY_PACK/Libs/apache/commons-lang-2.6.jar:$EMA_BINARY_PACK/Libs/apache/commons-collections-3.2.2.jar:$ETA_HOME/Libs/upa-$ETA_EMA_VERSION.jar:$ETA_HOME/Libs/upaValueAdd-$ETA_EMA_VERSION.jar
 
 echo $CLASSPATH
 
@@ -85,15 +86,15 @@ function build
    fi
 
    printf "Copying dependencies...\n"
-  cp -f $EMA_HOME/Libs/ema-3.2.1.0.jar $DISTDIR
+  cp -f $EMA_HOME/Libs/ema-$ETA_EMA_VERSION.jar $DISTDIR
   cp -f $EMA_BINARY_PACK/Libs/SLF4J/slf4j-1.7.12/slf4j-api-1.7.12.jar $DISTDIR
   cp -f $EMA_BINARY_PACK/Libs/SLF4J/slf4j-1.7.12/slf4j-jdk14-1.7.12.jar $DISTDIR
   cp -f $EMA_BINARY_PACK/Libs/apache/commons-configuration-1.10.jar $DISTDIR
   cp -f $EMA_BINARY_PACK/Libs/apache/commons-logging-1.2.jar $DISTDIR
   cp -f $EMA_BINARY_PACK/Libs/apache/commons-lang-2.6.jar $DISTDIR
   cp -f $EMA_BINARY_PACK/Libs/apache/commons-collections-3.2.2.jar $DISTDIR
-  cp -f $ETA_HOME/Libs/upa-3.2.1.0.jar $DISTDIR
-  cp -f $ETA_HOME/Libs/upaValueAdd-3.2.1.0.jar $DISTDIR
+  cp -f $ETA_HOME/Libs/upa-$ETA_EMA_VERSION.jar $DISTDIR
+  cp -f $ETA_HOME/Libs/upaValueAdd-$ETA_EMA_VERSION.jar $DISTDIR
   cp -f ../lib/commons-cli-1.4.jar $DISTDIR
   cp -f ../lib/json-20160810.jar $DISTDIR
 

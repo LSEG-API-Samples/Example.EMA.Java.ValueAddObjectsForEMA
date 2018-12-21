@@ -2,7 +2,7 @@
 
 **Before you start the application** you must configure the *EmaConfig.xml file* to specify the host name of the server (the TREP or Elektron platform) to which the EMA connects. This is set thanks to the value of the *\<ChannelGroup>\<ChannelList>\<Channel>\<Host>* node. This value can be a remote host name or IP address.
 
-To start the *ChainStepByStepExample* run the *chain-stepbystep-example.bat* or the *chain-stepbystep-example.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
+To start the *ChainStepByStepExample* run the *chain-stepbystep-example-with-esdk.x.x.x.bat* or the *chain-stepbystep-example-with-esdk.x.x.x.ksh* script matching your installed Elektron SDK version. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
 
 ### Expected output
 
