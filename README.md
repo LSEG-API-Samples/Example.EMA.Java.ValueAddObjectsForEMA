@@ -46,24 +46,24 @@ _ValueAddObjectsForEMA_ is an example of a complementary library to be used alon
 - Chain objects with a caching facility and a random access to chain constituents.
 
 These features are implemented in the following packages:
-- **com.refinitiv.platformservices.elektron.objects.common**  
+- **com.refinitiv.platformservices.rt.objects.common**  
 This package contains common interfaces and classes used by other modules of the library. It also provides general helper classes used by example applications (e.g. Dispatcher).   
-- **com.refinitiv.platformservices.elektron.objects.data**  
+- **com.refinitiv.platformservices.rt.objects.data**  
 This package contains in-memory implementations of OMM Data that are required by other modules for caching received data in-memory.
-- **com.refinitiv.platformservices.elektron.objects.marketprice**  
+- **com.refinitiv.platformservices.rt.objects.marketprice**  
 This package contains the interface and implementation class of MarketPrice objects that provides higher level features like: in-memory data caching, a random access to field values, full field description, synchronous/asynchronous subscription, completion status...<br>
 _**Note:** For more details about the logic implemented by the MarketPrice objects, please refer to the [A simple MarketPrice object for EMA](https://developers.refinitiv.com/article/simple-marketprice-object-ema-part-1) article._
-- **com.refinitiv.platformservices.elektron.objects.chain**  
+- **com.refinitiv.platformservices.rt.objects.chain**  
 This package contains the interface and implementation class of Chain objects that allow to automaticaly open chains and provides to their constituents.<br>
 _**Note:** For more details about the logic implemented by the FlatChain and RecursiveChain objects, please refer to the [Simple Chain objects for EMA](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-1) article._
-- **com.refinitiv.platformservices.elektron.objects.examples.marketprice**  
+- **com.refinitiv.platformservices.rt.objects.examples.marketprice**  
 This package contains an example application that demonstrates the MarketPrice objects capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it in with MarketPrice objects in several individual steps that demonstrate the implemented features. Before each step, explanatory text is displayed and you are prompted to press to start the step.
-- **com.refinitiv.platformservices.elektron.objects.examples.chain**  
+- **com.refinitiv.platformservices.rt.objects.examples.chain**  
 This package contains an example application that demonstrates the FlatChain and RecursiveChain objects capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it in with Chain objects in several individual steps that demonstrate the implemented features. Before each step, explanatory text is displayed and you are prompted to press to start the step.
 
 The _ValueAddObjectsForEMA_ example library also comes with a Javadoc that fully describes the exposed APIs.
 
-_**Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.refinitiv.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.refinitiv.com/elektron/elektron-sdk-java/learning)._
+_**Note:** If you do not know yet about the Enterprise Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.refinitiv.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.refinitiv.com/elektron/elektron-sdk-java/learning)._
 
 ## <a id="building-the-valueaddobjectsforema" name="building-the-valueaddobjectsforema"></a>Building the *ValueAddObjectsForEMA* library
 
@@ -71,40 +71,16 @@ _**Note:** If you do not know yet about the Elektron Message API (EMA) and how t
 
 This package includes some convenient files which will enable the developer to quickly build and run the example application. These scripts rely on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables. These variables must be set appropriately before you run any of the *build* or *run* scripts.
 * *JAVA_HOME* must be set with the root directory of your JDK 8 environment.
-* *ELEKTRON_JAVA_HOME* must be set with the root directory of your (EMA) Elektron Java API installation
+* *ELEKTRON_JAVA_HOME* must be set with the root directory of your (EMA) Enterprise Java API installation
 
 ### Change the service name and DACS user name if need be
 
-The *MarketPriceStepByStepExample.java* file and  *ChainStepByStepExample.java* file contain two hardcoded values that you may want to change depending on the TREP or Elektron Real-Time platform you use. These values indicate:
+The *MarketPriceStepByStepExample.java* file and  *ChainStepByStepExample.java* file contain two hardcoded values that you may want to change depending on the TREP or Refinitiv Real-Time platform you use. These values indicate:
 
 * The **service name** used to subscribe: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *SERVICE\_NAME* class members of the *MarketPriceStepByStepExample* and the *ChainStepByStepExample* classes.
 * The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *DACS\_USER\_NAME* class members of the *MarketPriceStepByStepExample* and the *ChainStepByStepExample* classes.
 
-### Run the *build* script
 
-Once these environment variables setup and hardcoded values are properly set, you must run the *build-with-esdk-x.x.x.bat* or the *build-with-esdk-x.x.x.ksh* script to build the _ValueAddObjectsForEMA_ example library and the related example applications. 
-
-_**Note:** The build script to be used must match the version of your installed Elektron SDK. For example: If you installed Elektron SDK 1.1.1 on a Windows machine then you should use the "build-with-esdk-1.1.x.bat" script. On the other hand, if you installed Elektron SDK 1.2.2 on a Linux machine then you should use the "build-with-esdk-1.2.2.ksh" script._
- 
-
-#### Expected output
-
-    Building ValueAddObjectsForEMA...
-    Building the ValueAddObjectsForEMA javadoc...
-    Building the MarketPriceStepByStepExample application...
-    Building the ChainStepByStepExample application...
-    Building jar files...
-    Copying dependencies...
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    ** ValueAddObjectsForEMA project successfully built **
 
 _**Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the applications. NetBeans 8.2 project files are provided with the applications source code._
 
