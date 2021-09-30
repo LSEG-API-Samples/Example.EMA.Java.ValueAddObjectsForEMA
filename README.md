@@ -67,19 +67,12 @@ _**Note:** If you do not know yet about the Enterprise Message API (EMA) and how
 
 ## <a id="building-the-valueaddobjectsforema" name="building-the-valueaddobjectsforema"></a>Building the *ValueAddObjectsForEMA* library
 
-### Set the required environment variables
-
-This package includes some convenient files which will enable the developer to quickly build and run the example application. These scripts rely on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables. These variables must be set appropriately before you run any of the *build* or *run* scripts.
-* *JAVA_HOME* must be set with the root directory of your JDK 8 environment.
-* *ELEKTRON_JAVA_HOME* must be set with the root directory of your (EMA) Enterprise Java API installation
-
 ### Change the service name and DACS user name if need be
 
 The *MarketPriceStepByStepExample.java* file and  *ChainStepByStepExample.java* file contain two hardcoded values that you may want to change depending on the TREP or Refinitiv Real-Time platform you use. These values indicate:
 
 * The **service name** used to subscribe: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *SERVICE\_NAME* class members of the *MarketPriceStepByStepExample* and the *ChainStepByStepExample* classes.
 * The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *DACS\_USER\_NAME* class members of the *MarketPriceStepByStepExample* and the *ChainStepByStepExample* classes.
-
 
 
 _**Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the applications. NetBeans 8.2 project files are provided with the applications source code._
