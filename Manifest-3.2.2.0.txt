@@ -1,2 +1,0 @@
-Class-Path: ema-3.2.2.0.jar upa-3.2.2.0.jar upaValueAdd-3.2.2.0.jar commons-configuration-1.10.jar commons-lang-2.6.jar commons-logging-1.2.jar commons-collections-3.2.2.jar slf4j-api-1.7.12.jar slf4j-jdk14-1.7.12.jar
-Main-Class: 

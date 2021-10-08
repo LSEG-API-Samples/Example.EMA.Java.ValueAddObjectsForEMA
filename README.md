@@ -34,7 +34,7 @@ The _ValueAddObjectsForEMA_ example library has been written by Refinitiv for th
 
 Required software components:
 
-* [Enterprise Message API](https://developers.refinitiv.com/elektron/elektron-sdk-java) (1.1.0 or greater) - Refinitiv interface to the Refinitiv Real-Time Market Data environment
+* [Enterprise Message API](https://developers.refinitiv.com/elektron/elektron-sdk-java) (2.0 or greater) - Refinitiv interface to the Refinitiv Real-Time Market Data environment
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Java Development Kit - version 8
 
 ## <a id="implemented-features" name="implemented-features"></a>Implemented Features
@@ -67,119 +67,11 @@ _**Note:** If you do not know yet about the Elektron Message API (EMA) and how t
 
 ## <a id="building-the-valueaddobjectsforema" name="building-the-valueaddobjectsforema"></a>Building the *ValueAddObjectsForEMA* library
 
-### Set the required environment variables
-
-This package includes some convenient files which will enable the developer to quickly build and run the example application. These scripts rely on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables. These variables must be set appropriately before you run any of the *build* or *run* scripts.
-* *JAVA_HOME* must be set with the root directory of your JDK 8 environment.
-* *ELEKTRON_JAVA_HOME* must be set with the root directory of your (EMA) Elektron Java API installation
-
 ### Change the service name and DACS user name if need be
 
 The *MarketPriceStepByStepExample.java* file and  *ChainStepByStepExample.java* file contain two hardcoded values that you may want to change depending on the TREP or Elektron Real-Time platform you use. These values indicate:
 
-* The **service name** used to subscribe: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *SERVICE\_NAME* class members of the *MarketPriceStepByStepExample* and the *ChainStepByStepExample* classes.
-* The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *DACS\_USER\_NAME* class members of the *MarketPriceStepByStepExample* and the *ChainStepByStepExample* classes.
-
-### Run the *build* script
-
-Once these environment variables setup and hardcoded values are properly set, you must run the *build-with-esdk-x.x.x.bat* or the *build-with-esdk-x.x.x.ksh* script to build the _ValueAddObjectsForEMA_ example library and the related example applications. 
-
-_**Note:** The build script to be used must match the version of your installed Elektron SDK. For example: If you installed Elektron SDK 1.1.1 on a Windows machine then you should use the "build-with-esdk-1.1.x.bat" script. On the other hand, if you installed Elektron SDK 1.2.2 on a Linux machine then you should use the "build-with-esdk-1.2.2.ksh" script._
- 
-
-#### Expected output
-
-    Building ValueAddObjectsForEMA...
-    Building the ValueAddObjectsForEMA javadoc...
-    Building the MarketPriceStepByStepExample application...
-    Building the ChainStepByStepExample application...
-    Building jar files...
-    Copying dependencies...
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    1 File(s) copied
-    ** ValueAddObjectsForEMA project successfully built **
-
-_**Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the applications. NetBeans 8.2 project files are provided with the applications source code._
-
-## <a id="running-the-example" name="running-the-example"></a>Running the example applications
-
-### [Running the *MarketPriceStepByStepExample*](MarketPrice-README.md)
-
-### [Running the *ChainStepByStepExample*](Chain-README.md)
-
-
-## <a id="troubleshooting" name="troubleshooting"></a>Troubleshooting
-
-**Q: When I build _ValueAddObjectsForEMA_ library or run the applications, it fails with an error like:**
-
-    The system cannot find the path specified
-
-**A:** The JAVA_HOME environment variable is not set, or set to the wrong path. See the [Building the *ValueAddObjectsForEMA* library](#building-the-valueaddobjectsforema) section above.
-
-<br>
-
-**Q: When I build the _ValueAddObjectsForEMA_ library I get warnings and "package ... does not exist" errors like:**
-
-    Building the ValueAddObjectsForEMA library...
-    warning: [path] bad path element "\Ema\Libs\ema.jar": no such file or directory
-    warning: [path] bad path element "\Ema\Libs\SLF4J\slf4j-1.7.12\slf4j-api-1.7.12.jar": no such file or directory
-    warning: [path] bad path element "\Ema\Libs\SLF4J\slf4j-1.7.12\slf4j-jdk14-1.7.12.jar": no such file or directory
-    warning: [path] bad path element "\Ema\Libs\apache\commons-configuration-1.10.jar": no such file or directory
-    warning: [path] bad path element "\Ema\Libs\apache\commons-logging-1.2.jar": nosuch file or directory
-    warning: [path] bad path element "\Ema\Libs\apache\commons-lang-2.6.jar": no such file or directory
-    warning: [path] bad path element "\Ema\Libs\apache\org.apache.commons.collections.jar": no such file or directory
-    warning: [path] bad path element "\Eta\Libs\upa.jar": no such file or directory
-    warning: [path] bad path element "\Eta\Libs\upaValueAdd.jar": no such file or directory
-    src\com\thomsonreuters\platformservices\elektron\objects\common\Dispatcher.java:3: error: package com.thomsonreuters.ema.access does not exist
-    import com.thomsonreuters.ema.access.OmmConsumer;
-                                        ^
-    src\com\thomsonreuters\platformservices\elektron\objects\common\Dispatcher.java:4: error: package com.thomsonreuters.ema.access does not exist
-    import com.thomsonreuters.ema.access.OmmException;
-                                        ^
-
-**A:** The ELEKTRON_JAVA_HOME environment variable is not set, or set to the wrong path.  See the [Building the *ValueAddObjectsForEMA* library](#building-the-valueaddobjectsforema) section above.
-
-<br>
-
-**Q: When I run the example applications, I get a JNI error with a NoClassDefFoundError exception like:**
-
-    Error: A JNI error has occurred, please check your installation and try again
-    Exception in thread "main" java.lang.NoClassDefFoundError: com/thomsonreuters/ema/access/OmmException
-            at java.lang.Class.getDeclaredMethods0(Native Method)
-            at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
-            at java.lang.Class.privateGetMethodRecursive(Class.java:3048)
-            at java.lang.Class.getMethod0(Class.java:3018)
-            at java.lang.Class.getMethod(Class.java:1784)
-            at sun.launcher.LauncherHelper.validateMainClass(LauncherHelper.java:544)
-            at sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:526)
-
-    Caused by: java.lang.ClassNotFoundException: com.thomsonreuters.ema.access.OmmException
-            at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-            at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-            at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
-            at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-            ... 7 more
-
-**A:** The ELEKTRON_JAVA_HOME environment variable is not set, or set to the wrong path. See the [Building the *ValueAddObjectsForEMA* library](#building-the-valueaddobjectsforema) section above.
-
-<br>
-
-**Q: The example application is stuck after the *">>> Creating the OmmConsumer"* message is displayed.**
-
-After a while the application displays an error like: 
-
-      ERROR - Can't create the OmmConsumer because of the following error: login failed (timed out after waiting 45000 milliseconds) for 10.2.43.49:14002)
-
-**A:** Verify that you properly set the *<host>* parameter in the EmaConfig.xml file (see [Running the *MarketPriceStepByStepExample*](MarketPrice-README.md) or  [Running the *ChainStepByStepExample*](Chain-README.md) for more). 
-Ultimately, ask your TREP administrator to help you to investigate with TREP monitoring tools like adsmon.
-
+* The **service name** used to subscribe: The hardcoded value is "ELEKTRON_DD". This value can be changed to that of the available service in the current environment.
  
 ## <a id="solution-code" name="solution-code"></a>Solution Code
 
