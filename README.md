@@ -13,10 +13,6 @@
 
 * [Building the *ValueAddObjectsForEMA*](#building-the-valueaddobjectsforema)
 
-* [Running the example applications](#running-the-example)
-
-* [Troubleshooting](#troubleshooting)
-
 * [Solution Code](#solution-code)
 
 ## <a id="overview" name=""></a>Overview
@@ -46,24 +42,24 @@ _ValueAddObjectsForEMA_ is an example of a complementary library to be used alon
 - Chain objects with a caching facility and a random access to chain constituents.
 
 These features are implemented in the following packages:
-- **com.refinitiv.platformservices.elektron.objects.common**  
+- **com.refinitiv.platformservices.rt.objects.common**  
 This package contains common interfaces and classes used by other modules of the library. It also provides general helper classes used by example applications (e.g. Dispatcher).   
-- **com.refinitiv.platformservices.elektron.objects.data**  
+- **com.refinitiv.platformservices.rt.objects.data**  
 This package contains in-memory implementations of OMM Data that are required by other modules for caching received data in-memory.
-- **com.refinitiv.platformservices.elektron.objects.marketprice**  
+- **com.refinitiv.platformservices.rt.objects.marketprice**  
 This package contains the interface and implementation class of MarketPrice objects that provides higher level features like: in-memory data caching, a random access to field values, full field description, synchronous/asynchronous subscription, completion status...<br>
 _**Note:** For more details about the logic implemented by the MarketPrice objects, please refer to the [A simple MarketPrice object for EMA](https://developers.refinitiv.com/article/simple-marketprice-object-ema-part-1) article._
-- **com.refinitiv.platformservices.elektron.objects.chain**  
+- **com.refinitiv.platformservices.rt.objects.chain**  
 This package contains the interface and implementation class of Chain objects that allow to automaticaly open chains and provides to their constituents.<br>
 _**Note:** For more details about the logic implemented by the FlatChain and RecursiveChain objects, please refer to the [Simple Chain objects for EMA](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-1) article._
-- **com.refinitiv.platformservices.elektron.objects.examples.marketprice**  
+- **com.refinitiv.platformservices.rt.objects.examples.marketprice**  
 This package contains an example application that demonstrates the MarketPrice objects capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it in with MarketPrice objects in several individual steps that demonstrate the implemented features. Before each step, explanatory text is displayed and you are prompted to press to start the step.
-- **com.refinitiv.platformservices.elektron.objects.examples.chain**  
+- **com.refinitiv.platformservices.rt.objects.examples.chain**  
 This package contains an example application that demonstrates the FlatChain and RecursiveChain objects capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it in with Chain objects in several individual steps that demonstrate the implemented features. Before each step, explanatory text is displayed and you are prompted to press to start the step.
 
 The _ValueAddObjectsForEMA_ example library also comes with a Javadoc that fully describes the exposed APIs.
 
-_**Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.refinitiv.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.refinitiv.com/elektron/elektron-sdk-java/learning)._
+_**Note:** If you do not know yet about the Enterprise Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.refinitiv.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.refinitiv.com/elektron/elektron-sdk-java/learning)._
 
 ## <a id="building-the-valueaddobjectsforema" name="building-the-valueaddobjectsforema"></a>Building the *ValueAddObjectsForEMA* library
 
@@ -75,11 +71,11 @@ The *MarketPriceStepByStepExample.java* file and  *ChainStepByStepExample.java* 
  
 ## <a id="solution-code" name="solution-code"></a>Solution Code
 
-The *ValueAddObjectsForEMA* example library was developed using the [Elektron SDK Java API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) that is available for download [here](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/downloads).
+The *ValueAddObjectsForEMA* example library was developed using the [Refinitiv Real-Time SDK Java API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) that is available for download [here](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/downloads).
 
 ### Built With
 
-* [Elektron Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java)
+* [Enterprise Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java)
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [NetBeans 8.2](https://netbeans.org/) - IDE for Java development
 
