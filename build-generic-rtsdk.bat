@@ -10,6 +10,7 @@ rem
 
 set RT_JAVA_HOME=C:\Real-Time-SDK-master
 
+
 set SCRIPT=%0
 set BINDIR=build\classes
 set JAVADOCDIR=dist\javadoc
