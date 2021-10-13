@@ -21,7 +21,7 @@ The *ValueAddObjectsForEMA* example library is based on the Java edition of the 
 
 For any question related to this project please use the Developer Community [Q&A Forum](https://community.developers.refinitiv.com).
 
-_**Note:** To be able to ask questions and to benefit from the full content available on the [TR Developer Community portal](https://developers.refinitiv.com) we recommend you to [register here]( https://login.refinitiv.com/iamui/UI/createUser?app_id=DevPlatform&realm=DevPlatform) or [login here]( https://developers.refinitiv.com/iam/login?destination_path=Lw%3D%3D)._
+_**Note:** To be able to ask questions and to benefit from the full content available on the [Refinitiv Developer Community portal](https://developers.refinitiv.com) we recommend you to [register here]( https://login.refinitiv.com/iamui/UI/createUser?app_id=DevPlatform&realm=DevPlatform) or [login here]( https://developers.refinitiv.com/iam/login?destination_path=Lw%3D%3D)._
 
 ## Disclaimer
 The _ValueAddObjectsForEMA_ example library has been written by Refinitiv for the only purpose of illustrating a series of articles published on the Refinitiv Developer Community. The _ValueAddObjectsForEMA_ example library has not been tested for a usage in production environments. Refinitiv cannot be held responsible for any issues that may happen if this project or the related source code is used in production or any other client environment.
