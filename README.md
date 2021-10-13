@@ -16,8 +16,8 @@
 * [Solution Code](#solution-code)
 
 ## <a id="overview" name=""></a>Overview
-This project is one of the many learning materials published by Refinitiv to help developers learning Refinitiv APIs. It contains an example library of value add objects, logics and algorithms shared among the Enterprise Message API (EMA) example applications built by Refinitiv Developer Advocates for the Developer Community. The rationales that lead to the development of these value add objects are detailed in the [Simplifying Content Access in EMA](https://developers.refinitiv.com/article/simplifying-content-access-ema/article.mdown) article available on the [Refinitiv Developer Community portal](https://developers.refinitiv.com). 
-The *ValueAddObjectsForEMA* example library is based on the Java edition of the Enterprise Message API that is one of the APIs of the Refinitiv Real-Time SDK. Please consult this [Refinitiv Real-Time SDK page](https://developers.refinitiv.com/elektron/elektron-sdk-java) for more learning materials and documentation about this API.
+This project is one of the many learning materials published by Refinitiv to help developers learning Refinitiv APIs. It contains an example library of value add objects, logics and algorithms shared among the Enterprise Message API (EMA) example applications built by Refinitiv Developer Advocates for the Developer Community. The rationales that lead to the development of these value add objects are detailed in the [Simplifying Content Access in EMA](https://developers.refinitiv.com/en/article-catalog/article/simplifying-content-access-in-ema) article available on the [Refinitiv Developer Community portal](https://developers.refinitiv.com). 
+The *ValueAddObjectsForEMA* example library is based on the Java edition of the Enterprise Message API that is one of the APIs of the Refinitiv Real-Time SDK. Please consult this [Refinitiv Real-Time SDK page](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) for more learning materials and documentation about this API.
 
 For any question related to this project please use the Developer Community [Q&A Forum](https://community.developers.refinitiv.com).
 
@@ -30,7 +30,7 @@ The _ValueAddObjectsForEMA_ example library has been written by Refinitiv for th
 
 Required software components:
 
-* [Enterprise Message API](https://developers.refinitiv.com/elektron/elektron-sdk-java) (2.0 or greater) - Refinitiv interface to the Refinitiv Real-Time Market Data environment
+* [Enterprise Message API](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) (2.0 or greater) - Refinitiv interface to the Refinitiv Real-Time Market Data environment
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Java Development Kit - version 8
 
 ## <a id="implemented-features" name="implemented-features"></a>Implemented Features
