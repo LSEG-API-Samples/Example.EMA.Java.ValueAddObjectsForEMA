@@ -1,14 +1,14 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
- * purpose of illustrating articles published on the Thomson Reuters Developer 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
+ * purpose of illustrating articles published on the Refinitiv Developer 
  * Community. It has not been tested for usage in production environments. 
- * Thomson Reuters cannot be held responsible for any issues that may happen if 
+ * Refinitiv cannot be held responsible for any issues that may happen if 
  * these objects or the related source code is used in production or any other 
  * client environment.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
+ * Refinitiv Developer Community: https://developers.refinitiv.com
  *
  */
 package com.refinitiv.platformservices.rt.objects.chain;
@@ -23,9 +23,9 @@ import com.refinitiv.platformservices.rt.objects.common.Completable;
  * Records</code> that are <code>MarketPrice</code> instruments that contain 
  * names of other instruments. <code>Chain Records</code> also contain additional
  * fields that link them together (More details about chains data structure are
- * available in <a href="https://developers.thomsonreuters.com/article/elektron-article-1" target="_blank">this article</a> 
- * available on the  <a href="https://developers.thomsonreuters.com" 
- * target="_blank">Thomson Reuters Developer Portal</a> ).
+ * available in <a href="https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-1" target="_blank">this article</a> 
+ * available on the  <a href="https://developers.refinitiv.com" 
+ * target="_blank">Refinitiv Developer Portal</a> ).
  * A <code>Chain</code> is an object that subscribes to the underlying 
  * linked list of <code>Chain Records</code> of a given chain and that retrieves 
  * the contained instruments names for you. 
@@ -65,8 +65,8 @@ public interface Chain extends Completable
 
     /**
      * Indicates if the name you used to build this <code>Chain</code> corresponds
-     * to an actual chain published on the Elektron or Thomson Reuters Enterprise 
-     * Platform (TREP) infrastructure. In order to determine if it's the case 
+     * to an actual chain published on the Elektron or Refinitiv Enterprise 
+     * Platform (RTDS) infrastructure. In order to determine if it's the case 
      * the chain must be opened so that it subscribed and decoded it's first 
      * <code>Chain Record</code>. If the chain is not opened, the method 
      * returns <code>false</code>.

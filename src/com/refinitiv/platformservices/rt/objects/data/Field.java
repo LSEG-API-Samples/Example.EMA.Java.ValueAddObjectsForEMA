@@ -1,14 +1,14 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
- * purpose of illustrating articles published on the Thomson Reuters Developer 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
+ * purpose of illustrating articles published on the Refinitiv Developer 
  * Community. It has not been tested for usage in production environments. 
- * Thomson Reuters cannot be held responsible for any issues that may happen if 
+ * Refinitiv cannot be held responsible for any issues that may happen if 
  * these objects or the related source code is used in production or any other 
  * client environment.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
+ * Refinitiv Developer Community: https://developers.refinitiv.com
  *
  */
 package com.refinitiv.platformservices.rt.objects.data;
@@ -20,7 +20,7 @@ import com.refinitiv.ema.rdm.DictionaryEntry;
 /**
  * The interface of a <code>Field</code> implementation that you can use
  * to retrieve field values of instruments published on the real-time platform. 
- * (Elektron or TREP). <code>Field</code> objects can be built using a 
+ * (Elektron or RTDS). <code>Field</code> objects can be built using a 
  * {@link Builder} but generally they are retrieved from Elektron objects like 
  * <code>MarketPrice</code>.
  * As an example, the code snippet below prints the BID and ASK fields from

@@ -1,14 +1,14 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
- * purpose of illustrating articles published on the Thomson Reuters Developer 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
+ * purpose of illustrating articles published on the Refinitiv Developer 
  * Community. It has not been tested for usage in production environments. 
- * Thomson Reuters cannot be held responsible for any issues that may happen if 
+ * Refinitiv cannot be held responsible for any issues that may happen if 
  * these objects or the related source code is used in production or any other 
  * client environment.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
+ * Refinitiv Developer Community: https://developers.refinitiv.com
  *
  */
 package com.refinitiv.platformservices.rt.objects.marketprice;
@@ -23,7 +23,7 @@ import java.util.LinkedList;
 /**
  * The interface of a <code>MarketPrice</code> implementation that you can use
  * to open level 1 instruments published on the real-time platform (Elektron 
- * or TREP). <code>MarketPrice</code>s must be built using a <code>MarketPrice.Builder</code>.
+ * or RTDS). <code>MarketPrice</code>s must be built using a <code>MarketPrice.Builder</code>.
  * As an example, the code snippet below creates and opens the EUR/USD currency 
  * quote (EUR=) <code>MarketPrice</code> published on the ELEKTRON_DD service:
  * <br>
@@ -134,7 +134,7 @@ public interface MarketPrice extends Completable
      * Represents an optional operation that is called when the <code>MarketPrice</code> 
      * is complete. This operation is optionally set when the <code>MarketPrice</code> 
      * is created. 
-     * See the {@link Builder#onComplete(com.thomsonreuters.platformservices.elektron.objects.marketprice.MarketPrice.OnCompleteFunction) }
+     * See the {@link Builder#onComplete(com.refinitiv.platformservices.rt.objects.marketprice.MarketPrice.OnCompleteFunction) }
      * for more details.
      */
     @FunctionalInterface
@@ -154,7 +154,7 @@ public interface MarketPrice extends Completable
      * Represents an optional operation that is called when a <code>MarketPrice</code>  
      * receives an new Refresh message (a.k.a. Image - All fields). This operation
      * is optionally set when the <code>MarketPrice</code> is created. 
-     * See the {@link Builder#onImage(com.thomsonreuters.platformservices.elektron.objects.marketprice.MarketPrice.OnImageFunction) }
+     * See the {@link Builder#onImage(com.refinitiv.platformservices.rt.objects.marketprice.MarketPrice.OnImageFunction) }
      * for more details.
      */
 @FunctionalInterface
@@ -175,7 +175,7 @@ public interface MarketPrice extends Completable
      * Represents an optional operation that is called when a <code>MarketPrice</code>  
      * receives an update message (updated fields only). This operation is optionally 
      * set when the <code>MarketPrice</code> is created. 
-     * See the {@link Builder#onUpdate(com.thomsonreuters.platformservices.elektron.objects.marketprice.MarketPrice.OnUpdateFunction) }
+     * See the {@link Builder#onUpdate(com.refinitiv.platformservices.rt.objects.marketprice.MarketPrice.OnUpdateFunction) }
      * for more details.
      */
     @FunctionalInterface
@@ -195,7 +195,7 @@ public interface MarketPrice extends Completable
      * Represents an optional operation that is called when a <code>MarketPrice</code>  
      * receives a Status message that transports a new State of the <code>MarketPrice</code>. 
      * This operation is optionally set when the <code>MarketPrice</code> is created. 
-     * See the {@link Builder#onState(com.thomsonreuters.platformservices.elektron.objects.marketprice.MarketPrice.OnStateFunction) }
+     * See the {@link Builder#onState(com.refinitiv.platformservices.rt.objects.marketprice.MarketPrice.OnStateFunction) }
      * for more details.
      */
     @FunctionalInterface
@@ -236,7 +236,7 @@ public interface MarketPrice extends Completable
         /**
          * Sets the EMA OmmConsumer used by the <code>MarketPrice</code> to subscribe. 
          * This <code>OmmConsumer</code> must have been properly initialized and connected 
-         * to a Thomson Reuters real-time platform.
+         * to a Refinitiv real-time platform.
          * 
          * @param ommConsumer the OmmConsumer that will be used by the 
          * <code>OmmConsumer</code> to subscribe.

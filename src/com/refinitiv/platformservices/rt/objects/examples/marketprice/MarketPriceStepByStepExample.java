@@ -1,14 +1,14 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
  * purpose of illustrating the "A simple MarketPrice object" article published on
- * the Thomson Reuters Developer Community. It has not been tested for a usage in 
+ * the Refinitiv Developer Community. It has not been tested for a usage in 
  * production environments.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
- * A simple MarketPrice object - Part 1: https://developers.thomsonreuters.com/article/simple-marketprice-object-part-1
- * A simple MarketPrice object - Part 2: https://developers.thomsonreuters.com/article/simple-marketprice-object-part-2
+ * Refinitiv Developer Community: https://developers.refinitiv.com
+ * A simple MarketPrice object - Part 1: https://developers.refinitiv.com/en/article-catalog/article/simple-marketprice-object-ema-part-1
+ * A simple MarketPrice object - Part 2: https://developers.refinitiv.com/en/article-catalog/article/simple-marketprice-object-ema-part-2
  *
  */
 package com.refinitiv.platformservices.rt.objects.examples.marketprice;
@@ -30,16 +30,16 @@ import java.util.Collection;
 
 class MarketPriceStepByStepExample
 {
-    // TREP or Elektron Service name used request MarketPrice instruments
+    // RTDS or Elektron Service name used request MarketPrice instruments
     // IMPORTANT NOTE:  You may need to change this value to match the
     // appropriate service name to be used in your environment
     private static final String SERVICE_NAME = "ELEKTRON_EDGE";
     
-    // If the Data Access Control System (DACS) is activated on your TREP 
+    // If the Data Access Control System (DACS) is activated on your RTDS 
     // and if your DACS username is different than your operating system user 
     // name, you may need to hardcode your DACS user name in this application.
     // To do so, you just have to set it in the following field. 
-    // Note: DACS user names are usualy provided by the TREP administration 
+    // Note: DACS user names are usualy provided by the RTDS administration 
     // team of your company. 
     private static final String DACS_USER_NAME = "";
 
@@ -65,7 +65,7 @@ class MarketPriceStepByStepExample
         out.println("|                                                                             |");
         out.println("| This example application illustrates the concepts explained in the          |");
         out.println("| \"A simple MarketPrice object or how to consume real-time Level1 data?\"      |");
-        out.println("| article published on the Thomson Reuters Developer Portal.                  |");
+        out.println("| article published on the Refinitiv Developer Portal.                  |");
         out.println("| More specifically, this application demonstrates how to use the value add   |");        
         out.println("| MarketPrice class that implements these concepts.                           |");
         out.println("|                                                                             |");

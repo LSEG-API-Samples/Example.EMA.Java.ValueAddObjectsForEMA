@@ -1,14 +1,14 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
- * purpose of illustrating articles published on the Thomson Reuters Developer 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
+ * purpose of illustrating articles published on the Refinitiv Developer 
  * Community. It has not been tested for usage in production environments. 
- * Thomson Reuters cannot be held responsible for any issues that may happen if 
+ * Refinitiv cannot be held responsible for any issues that may happen if 
  * these objects or the related source code is used in production or any other 
  * client environment.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
+ * Refinitiv Developer Community: https://developers.refinitiv.com
  *
  */
 package com.refinitiv.platformservices.rt.objects.chain;
@@ -109,7 +109,7 @@ public interface RecursiveChain extends Chain
     /**
      * Represents an optional operation that is called when an element is added 
      * to a {@link RecursiveChain}. This operation is optionally set when the 
-     * {@link RecursiveChain} is created. See the {@link Builder#onElementAdded(com.thomsonreuters.platformservices.elektron.objects.chain.RecursiveChain.OnElementAddedFunction) }
+     * {@link RecursiveChain} is created. See the {@link Builder#onElementAdded(com.refinitiv.platformservices.rt.objects.chain.RecursiveChain.OnElementAddedFunction) }
      * for more details.
      */
     @FunctionalInterface
@@ -132,7 +132,7 @@ public interface RecursiveChain extends Chain
     /**
      * Represents an optional operation that is called when a chain is complete.
      * This operation is optionally set when the {@link RecursiveChain} is 
-     * created. See the {@link Builder#onComplete(com.thomsonreuters.platformservices.elektron.objects.chain.RecursiveChain.OnCompleteFunction) }
+     * created. See the {@link Builder#onComplete(com.refinitiv.platformservices.rt.objects.chain.RecursiveChain.OnCompleteFunction) }
      * for more details.
      */
     @FunctionalInterface
@@ -149,7 +149,7 @@ public interface RecursiveChain extends Chain
     /**
      * Represents an optional operation that is called when a chain is in error.
      * This operation is optionally set when the {@link RecursiveChain} is 
-     * created. See the {@link Builder#onError(com.thomsonreuters.platformservices.elektron.objects.chain.RecursiveChain.OnErrorFunction) }
+     * created. See the {@link Builder#onError(com.refinitiv.platformservices.rt.objects.chain.RecursiveChain.OnErrorFunction) }
      * for more details.
      */    
     @FunctionalInterface
@@ -249,7 +249,7 @@ public interface RecursiveChain extends Chain
         /**
          * Sets the EMA OmmConsumer used by the chain to subscribe to the 
          * underlying <code>Chain Records</code>. This OmmConsumer must have 
-         * been properly initialized and connected to a Thomson Reuters real-time
+         * been properly initialized and connected to a Refinitiv real-time
          * infrastructure.
          * 
          * @param ommConsumer the OmmConsumer that will be used by the chain to
@@ -293,7 +293,7 @@ public interface RecursiveChain extends Chain
          * because they are not part of the chain's constituents. The number of 
          * summary links to skip is dependant of the Display Template field of
          * the chain. This method allows you to set the number of summary link 
-         * to skip for the specified display templates. Checkout this <a href="https://developers.thomsonreuters.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">Thomson Reuters article</a> 
+         * to skip for the specified display templates. Checkout this <a href="https://developers.refinitiv.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">Refinitiv article</a> 
          * to learn more about chains and summary links.  If this method is not 
          * called, no summary links will be skipped.
          * @param summaryLinksToSkipByDisplayTemplate the number of summary links to skip per 
@@ -309,7 +309,7 @@ public interface RecursiveChain extends Chain
         /**
          * Activates the "Name Guessing Optimization" and sets the number of 
          * names to guess when the chain subscribes to a new <code>Chain 
-         * Record</code>. Checkout this <a href="https://developers.thomsonreuters.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">Thomson Reuters article</a> 
+         * Record</code>. Checkout this <a href="https://developers.refinitiv.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">Refinitiv article</a> 
          * to learn more about the name guessing optimization.  If this method 
          * is not called, the "Name Guessing Optimization" is not activated.
          * @param guessesCount the number of names to guess. A reasonable value 

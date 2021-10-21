@@ -1,14 +1,14 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
- * purpose of illustrating articles published on the Thomson Reuters Developer 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
+ * purpose of illustrating articles published on the Refinitiv Developer 
  * Community. It has not been tested for usage in production environments. 
- * Thomson Reuters cannot be held responsible for any issues that may happen if 
+ * Refinitiv cannot be held responsible for any issues that may happen if 
  * these objects or the related source code is used in production or any other 
  * client environment.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
+ * Refinitiv Developer Community: https://developers.refinitiv.com
  *
  */
 package com.refinitiv.platformservices.rt.objects.chain;
@@ -25,13 +25,13 @@ import java.util.Map;
  * because they are not part of the chain's constituents. The number of 
  * summary links to skip depends on the Display Template used by the chain. 
  * This class holds this information that can be passed to a FlatChain or a 
- * RecursiveChain as a parameter. Checkout this <a href="https://developers.thomsonreuters.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">Thomson Reuters article</a> 
+ * RecursiveChain as a parameter. Checkout this <a href="https://developers.refinitiv.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">Refinitiv article</a> 
  * to learn more about chains and summary links.
  * <br>
  * To find out the number of summary links and the display template used by a 
  * given chain, you must open the chain in a consumer application that displays
  * the chain's fields and their values. We recommend you to read this Checkout 
- * this <a href="https://developers.thomsonreuters.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">article</a>
+ * this <a href="https://developers.refinitiv.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item" target="_blank">article</a>
  * to understand how to determine the display template used by the chain.<br>
  * As examples:<br>
  * <ul>

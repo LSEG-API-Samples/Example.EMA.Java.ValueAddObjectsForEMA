@@ -1,16 +1,16 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
  * purpose of illustrating the "Simple Chain objects for EMA" article published  
- * on the Thomson Reuters Developer Community. It has not been tested for usage 
- * in production environments. Thomson Reuters cannot be held responsible for any 
+ * on the Refinitiv Developer Community. It has not been tested for usage 
+ * in production environments. Refinitiv cannot be held responsible for any 
  * issues that may happen if these objects or the related source code is used in 
  * production or any other client environment.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
- * Simple Chain objects for EMA - Part 1: https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-1
- * Simple Chain objects for EMA - Part 2: https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-2
+ * Refinitiv Developer Community: https://developers.refinitiv.com
+ * Simple Chain objects for EMA - Part 1: https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-1
+ * Simple Chain objects for EMA - Part 2: https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-2
  *
  */
 package com.refinitiv.platformservices.rt.objects.examples.chain;
@@ -33,16 +33,16 @@ import java.time.temporal.ChronoUnit;
 
 class ChainStepByStepExample
 {
-    // TREP or Elektron Service name used request chains and tiles
+    // RTDS or Elektron Service name used request chains and tiles
     // IMPORTANT NOTE:  You may need to change this value to match the
     // appropriate service name to be used in your environment
     private static final String SERVICE_NAME = "ELEKTRON_EDGE";
     
-    // If the Data Access Control System (DACS) is activated on your TREP 
+    // If the Data Access Control System (DACS) is activated on your RTDS 
     // and if your DACS username is different than your operating system user 
     // name, you may need to hardcode your DACS user name in this application.
     // To do so, you just have to set it in the following field. 
-    // Note: DACS user names are usualy provided by the TREP administration 
+    // Note: DACS user names are usualy provided by the RTDS administration 
     // team of your company. 
     private static final String DACS_USER_NAME = "";
 
@@ -65,12 +65,12 @@ class ChainStepByStepExample
         System.out.println("|            Chain value add object for EMA - Example application             |");
         System.out.println("|                                                                             |");
         System.out.println("| This example application illustrates the concepts explained in the \"Simple |");
-        System.out.println("| Chain objects for EMA\" article published on the Thomson Reuters Developer  |");
+        System.out.println("| Chain objects for EMA\" article published on the Refinitiv Developer  |");
         System.out.println("| Portal portal. More specifically, this application demonstrates how to use  |");        
         System.out.println("| the value add chain objects that implements the different concepts,         |");
         System.out.println("| algorithms and optimizations described in the article.                      |");
-        System.out.println("| The value add chain objects for EMA are exposed by the com.thomsonreuters   |");
-        System.out.println("| .platformservices.elektron.objects.chain package of the                     |");
+        System.out.println("| The value add chain objects for EMA are exposed by the com.refinitiv        |");
+        System.out.println("| .platformservices.rt.objects.chain package of the                           |");
         System.out.println("| ValueAddObjectsForEMA example library.                                      |");
         System.out.println("| The application starts by creating an EMA OmmConsumer and uses it with the  |");
         System.out.println("| chain value add objects to expand a number of different chains,             |");
