@@ -41,15 +41,28 @@ class FieldImpl implements Field {
     {
         id = builder.id;
         dataDictionary = builder.dataDictionary;
-        
-        value = Utils.clone(builder.value, dataDictionary.entry(id));        
+        /**
+        * The DataDictionary.entry method is not thread-safe so the DataDictionary must be locked before calling the entry method
+        */
+        synchronized(dataDictionary) { 
+              value = Utils.clone(builder.value, dataDictionary.entry(id));     
+        }
     }
+
 
     @Override
     public DictionaryEntry description() 
     {
-        return dataDictionary.entry(id);
+       DictionaryEntry entry;
+       /**
+       * The DataDictionary.entry method is not thread-safe so the DataDictionary must be locked before calling the entry method
+       */
+       synchronized(dataDictionary){
+           entry = dataDictionary.entry(id);
+       }
+       return entry;
     }
+
 
     @Override
     public Data value() 
