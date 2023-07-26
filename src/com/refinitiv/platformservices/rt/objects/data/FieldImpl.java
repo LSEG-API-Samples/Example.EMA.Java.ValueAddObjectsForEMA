@@ -29,6 +29,7 @@ class FieldImpl implements Field {
     private final int  id;
     private final Data value;
     private final DataDictionary dataDictionary;
+    private DictionaryEntry entry;
    
     /**
      * Constructor used by the <code>Field.Builder</code> to build a new 
@@ -42,10 +43,19 @@ class FieldImpl implements Field {
         id = builder.id;
         dataDictionary = builder.dataDictionary;
         /**
-        * The DataDictionary.entry method is not thread-safe so the DataDictionary must be locked before calling the entry method
+        * Remove sychronize block and add the DictionayEntry as a new member in the class
         */
-        synchronized(dataDictionary) { 
-              value = Utils.clone(builder.value, dataDictionary.entry(id));     
+        entry = EmaFactory.createDictionaryEntry();
+       
+        if (dataDictionary.hasEntry(id))
+        {
+        	dataDictionary.entry(id, entry);
+        	value = Utils.clone(builder.value, entry);        
+        }else
+        {
+        	System.err.println("Unable to find the entry for this FID: "+id);
+        	entry = null;
+        	value = null;
         }
     }
 
@@ -53,13 +63,9 @@ class FieldImpl implements Field {
     @Override
     public DictionaryEntry description() 
     {
-       DictionaryEntry entry;
-       /**
-       * The DataDictionary.entry method is not thread-safe so the DataDictionary must be locked before calling the entry method
-       */
-       synchronized(dataDictionary){
-           entry = dataDictionary.entry(id);
-       }
+      /**
+       * Remove sychronize block and add the DictionayEntry as a new member in the class
+      */
        return entry;
     }
 
