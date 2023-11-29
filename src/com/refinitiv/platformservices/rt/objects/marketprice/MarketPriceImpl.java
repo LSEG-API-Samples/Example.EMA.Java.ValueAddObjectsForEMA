@@ -74,6 +74,10 @@ class MarketPriceImpl implements MarketPrice, OmmConsumerClient
     private final Map<Integer, Field> fieldsById = new TreeMap<>();    
     private final Map<String, Field> fieldsByName = new TreeMap<>();  
     private static Dispatcher dispatcher; 
+    
+    // Clone message to store OmmState
+    private StatusMsg clonedStatusMsg;
+    private RefreshMsg clonedRefreshMsg;
 
     /**
      * Constructor used by the <code>MarketPrice.Builder</code> to build a new 
@@ -206,7 +210,8 @@ class MarketPriceImpl implements MarketPrice, OmmConsumerClient
             streamId = refreshMsg.streamId();
         }
         
-        ommState = refreshMsg.state();
+        clonedRefreshMsg = EmaFactory.createRefreshMsg(refreshMsg);        
+        ommState = clonedRefreshMsg.state();        
         
         if(refreshMsg.domainType() == EmaRdm.MMT_MARKET_PRICE)
         {
@@ -246,17 +251,20 @@ class MarketPriceImpl implements MarketPrice, OmmConsumerClient
             streamId = statusMsg.streamId();
         }
         
-        ommState = statusMsg.state();
-        onStateFunction.onState(this, ommState);
-        
-        if((ommState.streamState() == StreamState.CLOSED ||
-            ommState.streamState() == StreamState.CLOSED_RECOVER ||
-            ommState.streamState() == StreamState.CLOSED_REDIRECTED)
-                &&
-           state == State.OPENING)
+        if(statusMsg.hasState()) 
         {
-            state = State.OPENED;
-            onCompleteFunction.onComplete(this);
+        	clonedStatusMsg = EmaFactory.createStatusMsg(statusMsg);
+            ommState = clonedStatusMsg.state();
+            onStateFunction.onState(this, ommState);
+        
+	        if((ommState.streamState() == StreamState.CLOSED ||
+	            ommState.streamState() == StreamState.CLOSED_RECOVER ||
+	            ommState.streamState() == StreamState.CLOSED_REDIRECTED)
+	                && state == State.OPENING)
+	        {
+	            state = State.OPENED;
+	            onCompleteFunction.onComplete(this);
+	        }
         }
     }
 
